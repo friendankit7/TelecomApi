@@ -32,7 +32,27 @@ public class TelecomproviderApplicationTests {
 	@Before
 	public void init() {
 		controller = new CustomerPhoneController(phoneNumberService);
-		when(phoneNumberService.getAllPhoneNumbers()).thenReturn(new ArrayList<PhoneNumberDTO>());
+		
+		List<PhoneNumberDTO> phoneNumbers = new ArrayList<PhoneNumberDTO>();
+		PhoneNumberDTO phoneNumber= new PhoneNumberDTO();
+		phoneNumber.setCircleCode("Andy");
+		phoneNumber.setCircleCode("London");
+		phoneNumber.setOperatorName("Vodafone");
+		phoneNumber.setPhoneNumber("+448989989");
+		phoneNumber.setStatus("InActive");
+		
+		PhoneNumberDTO otherPhoneNumber= new PhoneNumberDTO();
+		otherPhoneNumber.setCircleCode("Andy");
+		otherPhoneNumber.setCircleCode("London");
+		otherPhoneNumber.setOperatorName("Vodafone");
+		otherPhoneNumber.setPhoneNumber("+2132090090");
+		otherPhoneNumber.setStatus("Active");
+		phoneNumbers.add(otherPhoneNumber);
+		when(phoneNumberService.getAllPhoneNumbers()).thenReturn(phoneNumbers);
+		
+		when(phoneNumberService.getCustomerPhoneNumbers(100)).thenReturn(phoneNumbers);
+		when(phoneNumberService.getCustomerPhoneNumbers(101)).thenReturn(new ArrayList<PhoneNumberDTO>());
+		when(phoneNumberService.activatePhoneNumber("+2132090090")).thenReturn(otherPhoneNumber);
 	}
 
 	
