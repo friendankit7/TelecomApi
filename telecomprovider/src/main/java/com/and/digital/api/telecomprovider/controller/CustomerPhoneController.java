@@ -19,6 +19,10 @@ public class CustomerPhoneController {
 	@Autowired
 	private PhoneNumberService phoneNumberService;
 	
+	public CustomerPhoneController(PhoneNumberService phoneNumberService) {
+		this.phoneNumberService =  phoneNumberService;
+	}
+	
 	@GetMapping("/phoneNumbers")
 	public List<PhoneNumberDTO> getAllPhoneNumbers() {
 		return phoneNumberService.getAllPhoneNumbers();
